@@ -87,6 +87,12 @@ export function revealInstantly(root: HTMLElement) {
 }
 
 export function buildMasterTimeline(root: HTMLElement): gsap.core.Timeline {
+  /*
+   * GSAP's default lag smoothing is left ON deliberately. Turning it off keeps the reveal
+   * closer to the wall clock, but it also means a backgrounded tab (where rAF pauses)
+   * returns to a single enormous delta and the whole reveal snaps to its end state. A
+   * couple of seconds of drift during first paint is much cheaper than losing the reveal.
+   */
   const q = gsap.utils.selector(root);
   const tl = gsap.timeline({ defaults: { ease: 'power2.out' }, paused: true });
 

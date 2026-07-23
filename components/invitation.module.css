@@ -1,6 +1,7 @@
 /* ── page & canvas ─────────────────────────────────────────────────────────── */
 .page {
   position: relative;
+  min-height: 100vh;
   min-height: 100svh;
   overflow: hidden;
   background:
@@ -22,14 +23,29 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min(120vw, calc(100svh * 941 / 1672));
+  /*
+   * --u is the rendered width of the sheet, and every type size, gap and offset inside is
+   * a fraction of it, so the whole composition scales as one piece.
+   *
+   * Deliberately NOT container-query units (cqw): those need Safari 16, and where they are
+   * unsupported every font-size declaration is dropped and the typography collapses. This
+   * does the same arithmetic with min()/calc(), which work back to Safari 15.
+   */
+  --u: min(120vw, calc(100vh * 941 / 1672));
+  width: var(--u);
   aspect-ratio: 941 / 1672;
-  container-type: inline-size;
   background: var(--paper-art);
   overflow: hidden;
   box-shadow:
     0 26px 70px -34px rgba(119, 100, 125, 0.3),
     0 6px 20px -10px rgba(119, 100, 125, 0.14);
+}
+
+/* svh is the better unit where it exists (it ignores Safari's collapsing toolbars) */
+@supports (height: 100svh) {
+  .canvas {
+    --u: min(120vw, calc(100svh * 941 / 1672));
+  }
 }
 
 /* ── paper ─────────────────────────────────────────────────────────────────── */
@@ -101,13 +117,13 @@
   width: 86%;
   top: 16.75%;
   height: 11.37%;
-  gap: 0.4cqw;
+  gap: calc(var(--u) * 0.004);
 }
 
 .poeticLine {
   font-family: var(--font-naskh), serif;
   font-weight: 500;
-  font-size: 4.25cqw;
+  font-size: calc(var(--u) * 0.0425);
   line-height: 1.58;
   color: var(--ink-poetic);
   letter-spacing: 0.002em;
@@ -135,10 +151,10 @@
 .nameText {
   font-family: var(--font-ruqaa), serif;
   font-weight: 700;
-  font-size: 14cqw;
+  font-size: calc(var(--u) * 0.14);
   line-height: 0.95;
   color: var(--plum);
-  text-shadow: 0 0.35cqw 1.1cqw rgba(169, 150, 176, 0.24);
+  text-shadow: 0 calc(var(--u) * 0.0035) calc(var(--u) * 0.011) rgba(169, 150, 176, 0.24);
   /* Aref Ruqaa Ink carries tall ink extensions well past the 0.95 line box — this keeps
      them inside the reveal clip instead of shearing off the tops of the letters */
   padding: 0.18em 0.1em 0.14em;
@@ -177,7 +193,7 @@
 .supportText {
   font-family: var(--font-naskh), serif;
   font-weight: 600;
-  font-size: 3.6cqw;
+  font-size: calc(var(--u) * 0.036);
   line-height: 1.35;
   color: var(--ink-support);
   white-space: nowrap;
@@ -249,7 +265,7 @@ button.medallionPress:active {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.7cqw;
+  gap: calc(var(--u) * 0.007);
   padding: 34% 12% 13%;
   text-align: center;
 }
@@ -257,7 +273,7 @@ button.medallionPress:active {
 .medLabel {
   font-family: var(--font-plex), sans-serif;
   font-weight: 600;
-  font-size: 3.1cqw;
+  font-size: calc(var(--u) * 0.031);
   line-height: 1.2;
   color: var(--ink-label);
   letter-spacing: 0.01em;
@@ -266,7 +282,7 @@ button.medallionPress:active {
 .medValue {
   font-family: var(--font-naskh), serif;
   font-weight: 500;
-  font-size: 3.4cqw;
+  font-size: calc(var(--u) * 0.034);
   line-height: 1.34;
   color: var(--ink-value);
   white-space: nowrap;
@@ -275,17 +291,17 @@ button.medallionPress:active {
 /* tiny arabic tooltip shown on tap */
 .tooltip {
   position: absolute;
-  bottom: -3.4cqw;
+  bottom: calc(var(--u) * -0.034);
   right: 50%;
   transform: translateX(50%);
   font-family: var(--font-plex), sans-serif;
   font-weight: 500;
-  font-size: 2.5cqw;
+  font-size: calc(var(--u) * 0.025);
   color: var(--plum);
   background: rgba(255, 253, 249, 0.94);
   border: 1px solid var(--gold-line);
   border-radius: 999px;
-  padding: 0.7cqw 2cqw;
+  padding: calc(var(--u) * 0.007) calc(var(--u) * 0.02);
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
@@ -302,13 +318,13 @@ button.medallionPress:active {
   width: 76%;
   top: 65.5%;
   height: 5%;
-  gap: 0.2cqw;
+  gap: calc(var(--u) * 0.002);
 }
 
 .closingLine {
   font-family: var(--font-naskh), serif;
   font-weight: 500;
-  font-size: 3.15cqw;
+  font-size: calc(var(--u) * 0.0315);
   line-height: 1.4;
   color: var(--ink-poetic);
   white-space: nowrap;
@@ -324,7 +340,7 @@ button.medallionPress:active {
 .finalText {
   font-family: var(--font-plex), sans-serif;
   font-weight: 500;
-  font-size: 2.9cqw;
+  font-size: calc(var(--u) * 0.029);
   line-height: 1.3;
   color: var(--plum);
   letter-spacing: 0.03em;
