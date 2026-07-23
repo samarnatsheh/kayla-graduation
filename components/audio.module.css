@@ -1,0 +1,33 @@
+.toggle {
+  position: fixed;
+  top: max(14px, env(safe-area-inset-top));
+  left: max(14px, env(safe-area-inset-left));
+  z-index: 30;
+  width: 39px;
+  height: 39px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--plum);
+  background: rgba(255, 253, 249, 0.72);
+  border: 1px solid var(--gold-line);
+  backdrop-filter: blur(3px);
+  transition: transform 0.2s var(--ease-soft), background 0.25s var(--ease-soft);
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (hover: hover) {
+  .toggle:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 253, 249, 0.92);
+  }
+}
+
+.toggle:active {
+  transform: scale(0.98);
+}
+
+.icon {
+  width: 19px;
+  height: 19px;
+}

@@ -1,0 +1,92 @@
+@import './fonts.css';
+
+:root {
+  /* ── typefaces (self-hosted — see scripts/fetch-fonts.mjs) ───────────────── */
+  --font-ruqaa: 'Aref Ruqaa';
+  --font-naskh: 'Noto Naskh Arabic';
+  --font-plex: 'IBM Plex Sans Arabic';
+
+  /* ── palette ─────────────────────────────────────────────────────────────── */
+  --ivory: #faf7f2;
+  --paper-2: #f3ede5;
+  --paper-art: #f8f4f0; /* measured tone of the artwork's own paper */
+  --plum: #77647d;
+  --lavender: #a996b0;
+  --lavender-pale: #d8cdd9;
+  --sage: #899583;
+  --sage-deep: #677163;
+  --olive: #68683e;
+  --gold: #c5a56f;
+  --gold-line: #d1bb91;
+  --taupe: #62585a;
+  --white-soft: #fffdf9;
+
+  /* ── text ────────────────────────────────────────────────────────────────── */
+  --ink-poetic: #5f5557;
+  --ink-support: #68683e;
+  --ink-label: #88758a;
+  --ink-value: #5d6039;
+
+  --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* keep Safari from inflating text inside the scaled canvas */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  background: var(--ivory);
+  color: var(--ink-poetic);
+  font-family: var(--font-naskh), 'Times New Roman', serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* the artwork is the subject; stop long-press image menus getting in the way */
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--plum);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Content stays fully visible for anyone who never gets the animation. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

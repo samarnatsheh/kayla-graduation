@@ -1,0 +1,15 @@
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+Thumbs.db
+
+# working files for asset extraction — the cut layers in public/invitation are committed
+scripts/_*.png
+
+# the pristine source artwork is kept out of the public repo; the cut layers the site
+# actually needs are committed under public/invitation. Drop the file back in to re-run
+# `npm run assets`.
+scripts/source-artwork.png

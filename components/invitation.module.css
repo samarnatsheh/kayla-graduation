@@ -1,0 +1,371 @@
+/* ── page & canvas ─────────────────────────────────────────────────────────── */
+.page {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 80% at 50% 0%, #fdfbf7 0%, var(--ivory) 55%, var(--paper-2) 100%);
+}
+
+/*
+ * The sheet keeps its exact 9:16 proportion and is driven by viewport height, so the whole
+ * composition stays visible. On very tall phones the width cap lets it bleed a little past
+ * the screen edges rather than shrink — the artwork is designed to run off the edges there.
+ */
+.canvas {
+  /*
+   * Centred with an explicit translate rather than grid/flex centring: when the sheet is
+   * wider than the viewport, RTL alignment pushes the whole overflow onto one side, which
+   * would slice through the location medallion. This keeps any bleed symmetric.
+   */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(120vw, calc(100svh * 941 / 1672));
+  aspect-ratio: 941 / 1672;
+  container-type: inline-size;
+  background: var(--paper-art);
+  overflow: hidden;
+  box-shadow:
+    0 26px 70px -34px rgba(119, 100, 125, 0.3),
+    0 6px 20px -10px rgba(119, 100, 125, 0.14);
+}
+
+/* ── paper ─────────────────────────────────────────────────────────────────── */
+.paper,
+.grain,
+.light,
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.paper {
+  background: var(--paper-art);
+}
+
+.grain {
+  background-image: var(--grain-src);
+  background-repeat: repeat;
+  background-size: 190px 190px;
+  /* mean-preserving: mid-grey noise through soft-light adds tooth without shifting tone */
+  mix-blend-mode: soft-light;
+  opacity: 0;
+}
+
+.light {
+  background: radial-gradient(68% 44% at 84% 5%, rgba(255, 252, 244, 0.5) 0%, rgba(255, 252, 244, 0) 64%);
+}
+
+.vignette {
+  background: radial-gradient(96% 70% at 50% 52%, rgba(98, 88, 90, 0) 62%, rgba(98, 88, 90, 0.045) 100%);
+}
+
+/* ── botanical layers ──────────────────────────────────────────────────────── */
+.layer {
+  position: absolute;
+  will-change: transform, opacity;
+}
+
+.layerImg {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ── shared text scaffolding ───────────────────────────────────────────────── */
+.block {
+  position: absolute;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.block p {
+  margin: 0;
+}
+
+/* ── poetic opening ────────────────────────────────────────────────────────── */
+.poetic {
+  right: 7%;
+  width: 86%;
+  top: 16.75%;
+  height: 11.37%;
+  gap: 0.4cqw;
+}
+
+.poeticLine {
+  font-family: var(--font-naskh), serif;
+  font-weight: 500;
+  font-size: 4.25cqw;
+  line-height: 1.58;
+  color: var(--ink-poetic);
+  letter-spacing: 0.002em;
+  white-space: nowrap;
+}
+
+.word {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* ── graduate name ─────────────────────────────────────────────────────────── */
+.name {
+  right: 8%;
+  width: 84%;
+  top: 37.68%;
+  height: 7.48%;
+}
+
+.nameClip {
+  display: block;
+  will-change: clip-path;
+}
+
+.nameText {
+  font-family: var(--font-ruqaa), serif;
+  font-weight: 700;
+  font-size: 14cqw;
+  line-height: 0.95;
+  color: var(--plum);
+  text-shadow: 0 0.35cqw 1.1cqw rgba(169, 150, 176, 0.24);
+  /* Aref Ruqaa Ink carries tall ink extensions well past the 0.95 line box — this keeps
+     them inside the reveal clip instead of shearing off the tops of the letters */
+  padding: 0.18em 0.1em 0.14em;
+}
+
+/*
+ * One slow muted-gold pass over the calligraphy. The gradient only exists while the sweep
+ * is running — the attribute is removed the moment it finishes, so the resting state is
+ * always plain plum and can never be left half-toned if a browser mishandles the clip.
+ */
+.nameText[data-sweep='on'] {
+  background-image: linear-gradient(
+    90deg,
+    var(--plum) 0%,
+    var(--plum) 42%,
+    #b79b6f 50%,
+    var(--plum) 58%,
+    var(--plum) 100%
+  );
+  background-size: 260% 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── supporting line + divider ─────────────────────────────────────────────── */
+.support {
+  right: 10%;
+  width: 80%;
+  top: 46.1%;
+  height: 2.6%;
+}
+
+.supportText {
+  font-family: var(--font-naskh), serif;
+  font-weight: 600;
+  font-size: 3.6cqw;
+  line-height: 1.35;
+  color: var(--ink-support);
+  white-space: nowrap;
+}
+
+.divider {
+  position: absolute;
+  right: 50%;
+  top: 48.9%;
+  width: 34%;
+  height: 2%;
+  transform: translateX(50%);
+  pointer-events: none;
+  overflow: visible;
+}
+
+/* ── information medallions ────────────────────────────────────────────────── */
+.medallion {
+  position: absolute;
+  will-change: transform, opacity;
+}
+
+.medallionArt {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/*
+ * The pressable element wraps BOTH the oval artwork and its text, so a tap moves them
+ * together. Reveal animation lives on the outer .medallion, press/hover on this inner
+ * element — they never fight over the same transform.
+ */
+.medallionPress {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: none;
+  border: 0;
+  padding: 0;
+  border-radius: 46% / 34%;
+  transition: transform 0.18s var(--ease-soft);
+  -webkit-tap-highlight-color: transparent;
+}
+
+button.medallionPress {
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  button.medallionPress:hover {
+    transform: translateY(-2px);
+  }
+}
+
+button.medallionPress:active {
+  transform: scale(0.98);
+  transition-duration: 0.1s;
+}
+
+.medallionText {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7cqw;
+  padding: 34% 12% 13%;
+  text-align: center;
+}
+
+.medLabel {
+  font-family: var(--font-plex), sans-serif;
+  font-weight: 600;
+  font-size: 3.1cqw;
+  line-height: 1.2;
+  color: var(--ink-label);
+  letter-spacing: 0.01em;
+}
+
+.medValue {
+  font-family: var(--font-naskh), serif;
+  font-weight: 500;
+  font-size: 3.4cqw;
+  line-height: 1.34;
+  color: var(--ink-value);
+  white-space: nowrap;
+}
+
+/* tiny arabic tooltip shown on tap */
+.tooltip {
+  position: absolute;
+  bottom: -3.4cqw;
+  right: 50%;
+  transform: translateX(50%);
+  font-family: var(--font-plex), sans-serif;
+  font-weight: 500;
+  font-size: 2.5cqw;
+  color: var(--plum);
+  background: rgba(255, 253, 249, 0.94);
+  border: 1px solid var(--gold-line);
+  border-radius: 999px;
+  padding: 0.7cqw 2cqw;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.32s var(--ease-soft), transform 0.32s var(--ease-soft);
+}
+
+.tooltip[data-visible='true'] {
+  opacity: 1;
+}
+
+/* ── closing ───────────────────────────────────────────────────────────────── */
+.closing {
+  right: 12%;
+  width: 76%;
+  top: 65.5%;
+  height: 5%;
+  gap: 0.2cqw;
+}
+
+.closingLine {
+  font-family: var(--font-naskh), serif;
+  font-weight: 500;
+  font-size: 3.15cqw;
+  line-height: 1.4;
+  color: var(--ink-poetic);
+  white-space: nowrap;
+}
+
+.final {
+  right: 20%;
+  width: 60%;
+  top: 72.85%;
+  height: 2.64%;
+}
+
+.finalText {
+  font-family: var(--font-plex), sans-serif;
+  font-weight: 500;
+  font-size: 2.9cqw;
+  line-height: 1.3;
+  color: var(--plum);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+/* ── butterflies & particles ───────────────────────────────────────────────── */
+.butterflies,
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.butterfly {
+  position: absolute;
+  will-change: transform, opacity;
+  opacity: 0;
+}
+
+.wing {
+  transform-origin: 50% 50%;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* ── screen-reader only ────────────────────────────────────────────────────── */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

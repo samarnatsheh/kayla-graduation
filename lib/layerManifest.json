@@ -1,0 +1,187 @@
+{
+  "width": 941,
+  "height": 1672,
+  "paper": "#f8f4f0",
+  "layers": [
+    {
+      "id": "top-left-florals",
+      "x": 0,
+      "y": 0,
+      "w": 345,
+      "h": 452,
+      "feather": 34,
+      "src": "layer-top-left-florals.webp"
+    },
+    {
+      "id": "top-left-leaves",
+      "x": 0,
+      "y": 392,
+      "w": 240,
+      "h": 400,
+      "feather": 34,
+      "src": "layer-top-left-leaves.webp"
+    },
+    {
+      "id": "top-right-branch",
+      "x": 620,
+      "y": 0,
+      "w": 321,
+      "h": 250,
+      "feather": 26,
+      "src": "layer-top-right-branch.webp"
+    },
+    {
+      "id": "gold-speckles",
+      "x": 797,
+      "y": 147,
+      "w": 142,
+      "h": 172,
+      "feather": 22,
+      "src": "layer-gold-speckles.webp"
+    },
+    {
+      "id": "emblem",
+      "x": 368,
+      "y": 47,
+      "w": 210,
+      "h": 250,
+      "feather": 20,
+      "src": "layer-emblem.webp"
+    },
+    {
+      "id": "cap",
+      "x": 277,
+      "y": 453,
+      "w": 200,
+      "h": 219,
+      "feather": 18,
+      "src": "layer-cap.webp"
+    },
+    {
+      "id": "gold-branch",
+      "x": 635,
+      "y": 498,
+      "w": 126,
+      "h": 160,
+      "feather": 18,
+      "src": "layer-gold-branch.webp"
+    },
+    {
+      "id": "mid-right-cluster",
+      "x": 740,
+      "y": 536,
+      "w": 201,
+      "h": 296,
+      "feather": 24,
+      "src": "layer-mid-right-cluster.webp"
+    },
+    {
+      "id": "right-sprigs",
+      "x": 850,
+      "y": 818,
+      "w": 91,
+      "h": 140,
+      "feather": 14,
+      "src": "layer-right-sprigs.webp"
+    },
+    {
+      "id": "medallion-location",
+      "x": 76,
+      "y": 822,
+      "w": 256,
+      "h": 302,
+      "feather": 20,
+      "src": "layer-medallion-location.webp"
+    },
+    {
+      "id": "medallion-time",
+      "x": 344,
+      "y": 822,
+      "w": 256,
+      "h": 306,
+      "feather": 20,
+      "src": "layer-medallion-time.webp"
+    },
+    {
+      "id": "medallion-date",
+      "x": 612,
+      "y": 822,
+      "w": 260,
+      "h": 302,
+      "feather": 20,
+      "src": "layer-medallion-date.webp"
+    },
+    {
+      "id": "separator-left",
+      "x": 306,
+      "y": 864,
+      "w": 62,
+      "h": 222,
+      "feather": 14,
+      "src": "layer-separator-left.webp"
+    },
+    {
+      "id": "separator-right",
+      "x": 579,
+      "y": 864,
+      "w": 62,
+      "h": 222,
+      "feather": 14,
+      "src": "layer-separator-right.webp"
+    },
+    {
+      "id": "arch",
+      "x": 245,
+      "y": 1166,
+      "w": 490,
+      "h": 118,
+      "feather": 26,
+      "src": "layer-arch.webp"
+    },
+    {
+      "id": "portrait",
+      "x": 250,
+      "y": 1240,
+      "w": 478,
+      "h": 432,
+      "feather": 30,
+      "src": "layer-portrait.webp"
+    },
+    {
+      "id": "bottom-left-florals",
+      "x": 0,
+      "y": 1176,
+      "w": 276,
+      "h": 336,
+      "feather": 30,
+      "src": "layer-bottom-left-florals.webp"
+    },
+    {
+      "id": "bottom-right-florals",
+      "x": 692,
+      "y": 1140,
+      "w": 249,
+      "h": 418,
+      "feather": 30,
+      "src": "layer-bottom-right-florals.webp"
+    },
+    {
+      "id": "bottom-left-ribbon",
+      "x": 0,
+      "y": 1450,
+      "w": 284,
+      "h": 222,
+      "feather": 26,
+      "src": "layer-bottom-left-ribbon.webp"
+    },
+    {
+      "id": "bottom-right-ribbon",
+      "x": 682,
+      "y": 1490,
+      "w": 259,
+      "h": 182,
+      "feather": 26,
+      "src": "layer-bottom-right-ribbon.webp"
+    }
+  ]
+}
